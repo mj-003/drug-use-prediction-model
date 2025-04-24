@@ -106,10 +106,8 @@ def api_predict():
 
 @app.route('/visualize')
 def visualize():
-    # Tutaj możesz dodać kod do generowania wykresów
-    # Przykład z Plotly
     
-    # Dane przykładowe (zastąp swoimi)
+    # Dane przykładowe 
     age_data = {
         'Age': ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
         'User_Count': [320, 280, 210, 150, 90, 50],
