@@ -1,0 +1,188 @@
+:root {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-card: #252525;
+  --text-primary: #e0e0e0;
+  --text-secondary: #aaaaaa;
+  --accent-primary: #bb86fc;
+  --accent-secondary: #03dac6;
+  --danger: #cf6679;
+  --warning: #ffb74d;
+  --success: #81c784;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.navbar {
+  background-color: var(--bg-secondary);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--accent-primary) !important;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 2rem;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: none;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  background-color: rgba(187, 134, 252, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--accent-primary);
+  font-weight: 600;
+  padding: 1.25rem 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  border: none;
+  color: #000;
+}
+
+.btn-primary:hover {
+  background-color: #9a66df;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+.form-control,
+.form-select {
+  background-color: var(--bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 0.25rem rgba(187, 134, 252, 0.25);
+  color: var(--text-primary);
+}
+
+.form-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.progress {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  height: 10px;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  border-radius: 8px;
+}
+
+.progress-bar.bg-danger {
+  background-color: var(--danger) !important;
+}
+
+.progress-bar.bg-warning {
+  background-color: var(--warning) !important;
+}
+
+.progress-bar.bg-success {
+  background-color: var(--success) !important;
+}
+
+.chart {
+  width: 100%;
+  height: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(187, 134, 252, 0.1);
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+}
+
+/* Animacje */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+  animation-delay: 0.3s;
+}
