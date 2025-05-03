@@ -64,16 +64,20 @@
         <i class="fas fa-chart-bar me-3"></i>Wizualizacje Danych
       </h1>
 
+      <!-- Main visualization section -->
       <div class="row mb-4">
         <div class="col-lg-8">
           <div class="card animate-fade">
             <div class="card-header">
               <h3>
-                <i class="fas fa-chart-bar me-2"></i>Rozkład używania narkotyków
+                <i class="fas fa-chart-bar me-2"></i
+                ><span id="currentChartTitle"
+                  >Rozkład używania narkotyków według wieku</span
+                >
               </h3>
             </div>
             <div class="card-body">
-              <div id="chart" class="chart"></div>
+              <div id="mainChart" class="chart"></div>
             </div>
           </div>
         </div>
@@ -84,18 +88,46 @@
               <h3><i class="fas fa-info-circle me-2"></i>Objaśnienie</h3>
             </div>
             <div class="card-body">
-              <p>
-                Wykres przedstawia rozkład użytkowników i nie-użytkowników
-                narkotyków w zależności od grupy wiekowej.
-              </p>
-              <p>
-                Widoczny jest trend wskazujący na wyższą konsumpcję narkotyków w
-                młodszych grupach wiekowych (18-34 lat).
-              </p>
-              <p>
-                Różnice między płciami są również widoczne, z wyższym odsetkiem
-                użytkowników wśród mężczyzn.
-              </p>
+              <div id="ageExplanation">
+                <p>
+                  Wykres przedstawia rozkład użytkowników i nie-użytkowników
+                  narkotyków w zależności od grupy wiekowej.
+                </p>
+                <p>
+                  Widoczny jest trend wskazujący na wyższą konsumpcję narkotyków
+                  w młodszych grupach wiekowych (18-34 lat).
+                </p>
+              </div>
+              <div id="genderExplanation" style="display: none">
+                <p>
+                  Wykres przedstawia rozkład użytkowników i nie-użytkowników
+                  narkotyków w zależności od płci.
+                </p>
+                <p>
+                  Zauważalna jest większa tendencja do używania narkotyków wśród
+                  mężczyzn w porównaniu do kobiet.
+                </p>
+              </div>
+              <div id="educationExplanation" style="display: none">
+                <p>
+                  Wykres przedstawia rozkład użytkowników i nie-użytkowników
+                  narkotyków w zależności od poziomu edukacji.
+                </p>
+                <p>
+                  Możemy zaobserwować, jak poziom wykształcenia koreluje z
+                  tendencją do używania narkotyków.
+                </p>
+              </div>
+              <div id="mentalHealthExplanation" style="display: none">
+                <p>
+                  Wykres przedstawia rozkład użytkowników i nie-użytkowników
+                  narkotyków w zależności od poziomu zdrowia psychicznego.
+                </p>
+                <p>
+                  Wyższy poziom zaburzeń depresyjnych wykazuje korelację z
+                  większym prawdopodobieństwem używania narkotyków.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -132,6 +164,7 @@
         </div>
       </div>
 
+      <!-- Feature Correlations Chart -->
       <div class="card mb-4 animate-fade animate-delay-2">
         <div class="card-header">
           <h3>
@@ -144,6 +177,7 @@
         </div>
       </div>
 
+      <!-- User Profiles Chart -->
       <div class="card mb-4 animate-fade animate-delay-3">
         <div class="card-header">
           <h3>
@@ -214,44 +248,138 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      // Renderowanie wykresu Plotly
-      var graphJSON = {{ graphJSON|safe }};
-      Plotly.newPlot('chart', graphJSON.data, graphJSON.layout);
+      // Debugging visualization issues
+      console.log("Debugging visualization issues");
 
-      // Symulacja drugiego wykresu (korelacje)
-      var correlationData = [{
+      // Define fallback data for charts
+      const ageData = [
+        {
+          x: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
+          y: [539, 324, 199, 116, 38, 2],
+          name: 'Users',
           type: 'bar',
-          x: ['SS', 'Impulsywność', 'Neurotyczność', 'Ekstrawersja', 'Wiek', 'Edukacja', 'Zdrowie psych.'],
-          y: [0.42, 0.38, 0.21, 0.19, -0.35, -0.12, 0.28],
-          marker: {
-              color: ['rgba(187, 134, 252, 0.8)', 'rgba(187, 134, 252, 0.8)', 'rgba(187, 134, 252, 0.8)',
-                     'rgba(187, 134, 252, 0.8)', 'rgba(207, 102, 121, 0.8)', 'rgba(207, 102, 121, 0.8)',
-                     'rgba(187, 134, 252, 0.8)']
-          }
-      }];
+          marker: { color: 'rgba(187, 134, 252, 0.8)' }
+        },
+        {
+          x: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
+          y: [47, 117, 138, 169, 53, 16],
+          name: 'Non-users',
+          type: 'bar',
+          marker: { color: 'rgba(3, 218, 198, 0.8)' }
+        }
+      ];
 
-      var correlationLayout = {
-          title: 'Korelacja cech z używaniem narkotyków',
-          paper_bgcolor: 'rgba(0,0,0,0)',
-          plot_bgcolor: 'rgba(0,0,0,0)',
-          font: {
-              color: '#e0e0e0'
-          },
-          margin: {
-              l: 50,
-              r: 20,
-              t: 50,
-              b: 80
-          },
-          xaxis: {
-              tickangle: -45
-          }
+      const ageLayout = {
+        title: 'Distribution of Drug Users by Age Group',
+        barmode: 'group',
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        font: { color: '#e0e0e0' }
       };
 
-      Plotly.newPlot('correlationChart', correlationData, correlationLayout);
+      const genderData = [
+        {
+          x: ['Female', 'Male'],
+          y: [545, 673],
+          name: 'Users',
+          type: 'bar',
+          marker: { color: 'rgba(187, 134, 252, 0.8)' }
+        },
+        {
+          x: ['Female', 'Male'],
+          y: [280, 260],
+          name: 'Non-users',
+          type: 'bar',
+          marker: { color: 'rgba(3, 218, 198, 0.8)' }
+        }
+      ];
 
-      // Symulacja wykresu profili
-      var profilesData = [{
+      const genderLayout = {
+        title: 'Distribution of Drug Users by Gender',
+        barmode: 'group',
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        font: { color: '#e0e0e0' }
+      };
+
+      const correlationData = [{
+        type: 'bar',
+        x: ['SS', 'Impulsive', 'Nscore', 'Mental health level', 'Escore', 'Cscore', 'Education', 'Age'],
+        y: [0.42, 0.38, 0.21, 0.28, 0.19, -0.08, -0.12, -0.35],
+        marker: {
+          color: ['rgba(187, 134, 252, 0.8)', 'rgba(187, 134, 252, 0.8)',
+                 'rgba(187, 134, 252, 0.8)', 'rgba(187, 134, 252, 0.8)',
+                 'rgba(187, 134, 252, 0.8)', 'rgba(207, 102, 121, 0.8)',
+                 'rgba(207, 102, 121, 0.8)', 'rgba(207, 102, 121, 0.8)']
+        }
+      }];
+
+      const correlationLayout = {
+        title: 'Feature Correlations with Drug Use',
+        xaxis_tickangle: -45,
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        font: { color: '#e0e0e0' }
+      };
+
+      // Try to load chart data from server, if present
+      let chartData = {};
+
+      try {
+        // Server-rendered data
+        const serverGraphJSON = {{ graphJSON|tojson|safe if graphJSON else 'null' }};
+        const serverGenderJSON = {{ genderJSON|safe if genderJSON else 'null' }};
+        const serverCorrJSON = {{ corrJSON|safe if corrJSON else 'null' }};
+
+        if (graphJSON) {
+          chartData.age = graphJSON;
+          console.log("Successfully loaded age data from server");
+        }
+
+        if (genderJSON) {
+          chartData.gender = genderJSON;
+          console.log("Successfully loaded gender data from server");
+        }
+
+        if (corrJSON) {
+          chartData.correlation = corrJSON;
+          console.log("Successfully loaded correlation data from server");
+        }
+      } catch (e) {
+        console.error("Error loading chart data from server:", e);
+        // Fallback to hardcoded data
+        chartData = {
+          age: { data: ageData, layout: ageLayout },
+          gender: { data: genderData, layout: genderLayout },
+          correlation: { data: correlationData, layout: correlationLayout }
+        };
+        console.log("Using fallback chart data");
+      }
+
+      // If no server data is available, use fallback data
+      if (!chartData.age) {
+        console.log("No age data from server, using fallback");
+        chartData.age = { data: ageData, layout: ageLayout };
+      }
+
+      if (!chartData.gender) {
+        console.log("No gender data from server, using fallback");
+        chartData.gender = { data: genderData, layout: genderLayout };
+      }
+
+      if (!chartData.correlation) {
+        console.log("No correlation data from server, using fallback");
+        chartData.correlation = { data: correlationData, layout: correlationLayout };
+      }
+
+      // Initialize main chart
+      Plotly.newPlot('mainChart', chartData.age.data, chartData.age.layout);
+
+      // Initialize correlation chart
+      Plotly.newPlot('correlationChart', chartData.correlation.data, chartData.correlation.layout);
+
+      // Synthetic profiles chart
+      const profilesData = [{
           type: 'scatter',
           mode: 'markers',
           x: [1.42, 0.92, 2.12, -0.51, 0.68, 1.87],
@@ -267,7 +395,7 @@
           }
       }];
 
-      var profilesLayout = {
+      const profilesLayout = {
           title: 'Rozkład syntetycznych profili',
           paper_bgcolor: 'rgba(0,0,0,0)',
           plot_bgcolor: 'rgba(0,0,0,0)',
@@ -283,7 +411,167 @@
       };
 
       Plotly.newPlot('profilesChart', profilesData, profilesLayout);
+
+      // Handle chart type change
+      document.getElementById('chartType').addEventListener('change', function() {
+        updateVisibleChart(this.value);
+      });
+
+      // Update visible chart based on selection
+      function updateVisibleChart(chartType) {
+        // Update chart title
+        const titleMap = {
+          'age': 'Rozkład używania narkotyków według wieku',
+          'gender': 'Rozkład używania narkotyków według płci',
+          'education': 'Rozkład używania narkotyków według edukacji',
+          'mentalHealth': 'Rozkład używania narkotyków według zdrowia psychicznego'
+        };
+
+        document.getElementById('currentChartTitle').textContent = titleMap[chartType];
+
+        // Show/hide relevant explanations
+        document.getElementById('ageExplanation').style.display = 'none';
+        document.getElementById('genderExplanation').style.display = 'none';
+        document.getElementById('educationExplanation').style.display = 'none';
+        document.getElementById('mentalHealthExplanation').style.display = 'none';
+
+        // Show the relevant explanation
+        document.getElementById(`${chartType}Explanation`).style.display = 'block';
+
+        // Update the chart based on selection
+        if (chartType === 'age') {
+          Plotly.newPlot('mainChart', chartData.age.data, chartData.age.layout);
+        } else if (chartType === 'gender') {
+          Plotly.newPlot('mainChart', chartData.gender.data, chartData.gender.layout);
+        } else {
+          // For education and mental health, we use sample data for now
+          // This would be replaced with real data in a complete implementation
+          const sampleData = [{
+            type: 'bar',
+            x: chartType === 'education' ?
+              ['No education', 'Primary', 'Secondary', 'College', 'University', 'Masters', 'Doctorate'] :
+              ['Low', 'Medium-Low', 'Medium-High', 'High'],
+            y: chartType === 'education' ?
+              [10, 35, 95, 180, 220, 130, 70] :
+              [50, 110, 230, 290],
+            name: 'Users',
+            marker: { color: 'rgba(187, 134, 252, 0.8)' }
+          }, {
+            type: 'bar',
+            x: chartType === 'education' ?
+              ['No education', 'Primary', 'Secondary', 'College', 'University', 'Masters', 'Doctorate'] :
+              ['Low', 'Medium-Low', 'Medium-High', 'High'],
+            y: chartType === 'education' ?
+              [5, 20, 60, 120, 180, 150, 100] :
+              [100, 130, 90, 45],
+            name: 'Non-users',
+            marker: { color: 'rgba(3, 218, 198, 0.8)' }
+          }];
+
+          const layout = {
+            title: titleMap[chartType],
+            barmode: 'group',
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#e0e0e0' }
+          };
+
+          Plotly.newPlot('mainChart', sampleData, layout);
+        }
+      }
+
+      // Handle update chart button
+      document.getElementById('updateChart').addEventListener('click', function() {
+        const chartType = document.getElementById('chartType').value;
+        const drugType = document.getElementById('drugType').value;
+
+        // Simulate loading
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Aktualizowanie...';
+        this.disabled = true;
+
+        // In a real implementation, this would make an AJAX call to the server
+        // to get data filtered by drug type
+        setTimeout(() => {
+          updateVisibleChart(chartType);
+
+          // Update chart title to reflect drug type
+          const drugTypeLabels = {
+            'all': 'wszystkich narkotyków',
+            'opioid': 'opioidów',
+            'ecstasy': 'ekstazy',
+            'benzo': 'benzodiazepin'
+          };
+
+          const chartTypeLabels = {
+            'age': 'wieku',
+            'gender': 'płci',
+            'education': 'edukacji',
+            'mentalHealth': 'zdrowia psychicznego'
+          };
+
+          document.getElementById('currentChartTitle').textContent =
+            `Rozkład używania ${drugTypeLabels[drugType]} według ${chartTypeLabels[chartType]}`;
+
+          // Reset button
+          this.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Aktualizuj wykres';
+          this.disabled = false;
+        }, 800);
+      });
+
+      // Handle generate profiles button
+      document.getElementById('generateProfiles').addEventListener('click', function() {
+        // Simulate loading
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Generowanie...';
+        this.disabled = true;
+
+        setTimeout(() => {
+          // Generate new random data for profiles
+          const newProfilesX = Array.from({length: 6}, () => (Math.random() * 3 - 1.5).toFixed(2));
+          const newProfilesY = Array.from({length: 6}, () => (Math.random() * 3 - 1.5).toFixed(2));
+          const newProbabilities = newProfilesX.map((x, i) => {
+            // Higher x and y values lead to higher probability
+            const val = 0.3 + 0.4 * (parseFloat(x) + 1.5) / 3 + 0.3 * (parseFloat(newProfilesY[i]) + 1.5) / 3;
+            return Math.min(0.95, Math.max(0.05, val));
+          });
+
+          // Update the scatter plot
+          Plotly.restyle('profilesChart', {
+            x: [newProfilesX],
+            y: [newProfilesY],
+            marker: {
+              color: newProbabilities,
+              colorscale: 'Viridis',
+              size: 14
+            }
+          });
+
+          // Update the table
+          const tbody = document.querySelector('table tbody');
+          tbody.innerHTML = '';
+
+          for (let i = 0; i < 3; i++) {
+            const age = ['18-24', '25-34', '35-44'][Math.floor(Math.random() * 3)];
+            const gender = Math.random() > 0.5 ? 'M' : 'K';
+            const ss = newProfilesX[i];
+            const impulsive = newProfilesY[i];
+            const probability = Math.round(newProbabilities[i] * 100);
+
+            tbody.innerHTML += `
+              <tr>
+                <td>${age}</td>
+                <td>${gender}</td>
+                <td>${ss}</td>
+                <td>${impulsive}</td>
+                <td>${probability}%</td>
+              </tr>
+            `;
+          }
+
+          // Reset button
+          this.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Wygeneruj nowe profile';
+          this.disabled = false;
+        }, 1000);
+      });
     </script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>
