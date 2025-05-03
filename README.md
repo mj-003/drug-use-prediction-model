@@ -1,26 +1,56 @@
-# Drug Classification Project
+# Drug Consumption Analysis and Prediction Project
 
-This report aims to explore data analysis methods in the context of drug use, utilizing advanced predictive models based on demographic, personality, and health-related data. By analyzing these factors and their interconnections, we aim to identify determinants of drug use risk and predict such behavior based on available data. The full report detailing the steps, results, and conclusions of the project can be found in the `drugs_raport.pdf` file.
+## Demo Video
+
+
+https://github.com/user-attachments/assets/463c9a54-6068-44ef-a852-bc7276e21b3d
+
 
 ## Project Overview
+This project aims to explore data analysis methods in the context of drug use, utilizing advanced predictive models based on demographic, personality, and mental health-related data. We analyze these factors and their interconnections to identify determinants of drug use risk and predict such behavior based on available features.
 
-The project focuses on building a machine learning model to predict drug classification based on available features. The dataset used is preprocessed and cleaned, followed by the application of classification algorithms to evaluate their performance. The report provides detailed insights into the methods, models, and results obtained throughout the project.
+### The project combines:
 
-## Libraries Used
+- Data analysis and visualization of drug consumption patterns
+- Predictive modeling using machine learning algorithms
+- Interactive web application for showcasing results and making predictions
 
-This project utilizes the following libraries:
+The machine learning model developed through this research achieves over 80% accuracy in classifying drug users versus non-users based on personality traits and other factors.
 
-- **NumPy** - used for numerical operations and handling arrays and matrices.
+## Web Application
+The project includes a complete web application built with Flask that allows:
 
-- **Pandas** - used for data manipulation and analysis, especially for handling structured data.
+- Prediction Interface: Input demographic and personality trait information to receive a risk assessment
+- Data Visualization: Interactive charts showing drug use patterns across different demographics and personality traits
+- Profile Analysis: Synthetic user profile generation and visualization
 
-- **Matplotlib** - used for data visualization, specifically for creating static, interactive, and animated plots.
+## Dataset
+The model uses data including:
 
-- **Seaborn** - built on top of Matplotlib, used for statistical data visualization with enhanced plotting features.
+- Demographics (age, gender, education, country)
+- Big Five personality traits (Neuroticism, Extraversion, Openness, Agreeableness, Conscientiousness)
+- Impulsivity and Sensation Seeking scores
+- Mental health indicators by age group
+- Drug consumption history across three categories (opioids, ecstasy, benzodiazepines)
 
-- **Scikit-learn** - this project uses various modules from Scikit-learn, a key library for machine learning:
+## Libraries and Technologies Used
+### Backend
 
-## Report
+- Python - Core programming language
+- NumPy - Numerical operations and handling arrays/matrices
+- Pandas - Data manipulation and analysis
+- Flask - Web application framework
+- Joblib - Model serialization
 
-A full report is provided in the `drugs_raport.pdf` file, which contains a detailed explanation of the steps taken during the project, the machine learning models used, and the performance evaluation results.
+### Machine Learning
 
+- Scikit-learn - Feature processing, model evaluation, and utilities
+- XGBoost - Gradient boosting implementation for classification
+- TensorFlow/Keras - Neural network implementation (alternative model)
+
+### Frontend
+
+- HTML/CSS/JavaScript - Web interface structure and styling
+- Bootstrap - Responsive design components
+- Plotly.js - Interactive data visualizations
+- Font Awesome - Icon library
