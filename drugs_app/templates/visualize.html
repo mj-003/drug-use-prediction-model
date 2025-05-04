@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,7 +61,7 @@
 
     <div class="container">
       <h1 class="display-5 fw-bold mb-4 animate-fade">
-        <i class="fas fa-chart-bar me-3"></i>Wizualizacje Danych
+        <i class="fas fa-chart-bar me-3"></i>Data Visualizations
       </h1>
 
       <!-- Main visualization section -->
@@ -72,7 +72,7 @@
               <h3>
                 <i class="fas fa-chart-bar me-2"></i
                 ><span id="currentChartTitle"
-                  >Rozkład używania narkotyków według wieku</span
+                  >Distribution of drug use by age</span
                 >
               </h3>
             </div>
@@ -85,47 +85,47 @@
         <div class="col-lg-4">
           <div class="card animate-fade animate-delay-1 mb-4">
             <div class="card-header">
-              <h3><i class="fas fa-info-circle me-2"></i>Objaśnienie</h3>
+              <h3><i class="fas fa-info-circle me-2"></i>Explanation</h3>
             </div>
             <div class="card-body">
               <div id="ageExplanation">
                 <p>
-                  Wykres przedstawia rozkład użytkowników i nie-użytkowników
-                  narkotyków w zależności od grupy wiekowej.
+                  The chart shows the distribution of drug users and non-users
+                  by age group.
                 </p>
                 <p>
-                  Widoczny jest trend wskazujący na wyższą konsumpcję narkotyków
-                  w młodszych grupach wiekowych (18-34 lat).
+                  There is a visible trend indicating higher drug consumption in
+                  younger age groups (18-34 years).
                 </p>
               </div>
               <div id="genderExplanation" style="display: none">
                 <p>
-                  Wykres przedstawia rozkład użytkowników i nie-użytkowników
-                  narkotyków w zależności od płci.
+                  The chart shows the distribution of drug users and non-users
+                  by gender.
                 </p>
                 <p>
-                  Zauważalna jest większa tendencja do używania narkotyków wśród
-                  mężczyzn w porównaniu do kobiet.
+                  There is a noticeable higher tendency for drug use among males
+                  compared to females.
                 </p>
               </div>
               <div id="educationExplanation" style="display: none">
                 <p>
-                  Wykres przedstawia rozkład użytkowników i nie-użytkowników
-                  narkotyków w zależności od poziomu edukacji.
+                  The chart shows the distribution of drug users and non-users
+                  by education level.
                 </p>
                 <p>
-                  Możemy zaobserwować, jak poziom wykształcenia koreluje z
-                  tendencją do używania narkotyków.
+                  We can observe how education level correlates with the
+                  tendency to use drugs.
                 </p>
               </div>
               <div id="mentalHealthExplanation" style="display: none">
                 <p>
-                  Wykres przedstawia rozkład użytkowników i nie-użytkowników
-                  narkotyków w zależności od poziomu zdrowia psychicznego.
+                  The chart shows the distribution of drug users and non-users
+                  by mental health level.
                 </p>
                 <p>
-                  Wyższy poziom zaburzeń depresyjnych wykazuje korelację z
-                  większym prawdopodobieństwem używania narkotyków.
+                  Higher levels of depressive disorders show a correlation with
+                  a greater probability of drug use.
                 </p>
               </div>
             </div>
@@ -133,31 +133,31 @@
 
           <div class="card animate-fade animate-delay-2">
             <div class="card-header">
-              <h3><i class="fas fa-filter me-2"></i>Filtry</h3>
+              <h3><i class="fas fa-filter me-2"></i>Filters</h3>
             </div>
             <div class="card-body">
               <div class="mb-3">
-                <label class="form-label">Typ wykresu</label>
+                <label class="form-label">Chart type</label>
                 <select class="form-select" id="chartType">
-                  <option value="age">Wiek</option>
-                  <option value="gender">Płeć</option>
-                  <option value="education">Edukacja</option>
-                  <option value="mentalHealth">Zdrowie psychiczne</option>
+                  <option value="age">Age</option>
+                  <option value="gender">Gender</option>
+                  <option value="education">Education</option>
+                  <option value="mentalHealth">Mental health</option>
                 </select>
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Typ narkotyku</label>
+                <label class="form-label">Drug type</label>
                 <select class="form-select" id="drugType">
-                  <option value="all">Wszystkie</option>
-                  <option value="opioid">Opioidy</option>
-                  <option value="ecstasy">Ekstazy</option>
-                  <option value="benzo">Benzodiazepiny</option>
+                  <option value="all">All</option>
+                  <option value="opioid">Opioids</option>
+                  <option value="ecstasy">Ecstasy</option>
+                  <option value="benzo">Benzodiazepines</option>
                 </select>
               </div>
 
               <button class="btn btn-primary w-100" id="updateChart">
-                <i class="fas fa-sync-alt me-2"></i>Aktualizuj wykres
+                <i class="fas fa-sync-alt me-2"></i>Update chart
               </button>
             </div>
           </div>
@@ -168,8 +168,8 @@
       <div class="card mb-4 animate-fade animate-delay-2">
         <div class="card-header">
           <h3>
-            <i class="fas fa-brain me-2"></i>Korelacje cech osobowości z
-            używaniem narkotyków
+            <i class="fas fa-brain me-2"></i>Personality trait correlations with
+            drug use
           </h3>
         </div>
         <div class="card-body">
@@ -181,8 +181,7 @@
       <div class="card mb-4 animate-fade animate-delay-3">
         <div class="card-header">
           <h3>
-            <i class="fas fa-user-friends me-2"></i>Syntetyczne profile
-            użytkowników
+            <i class="fas fa-user-friends me-2"></i>Synthetic user profiles
           </h3>
         </div>
         <div class="card-body">
@@ -191,16 +190,16 @@
               <div id="profilesChart" class="chart"></div>
             </div>
             <div class="col-lg-6">
-              <h5 class="mb-3">Wygenerowane profile</h5>
+              <h5 class="mb-3">Generated profiles</h5>
               <div class="table-responsive">
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>Wiek</th>
-                      <th>Płeć</th>
+                      <th>Age</th>
+                      <th>Gender</th>
                       <th>SS</th>
-                      <th>Impulsywność</th>
-                      <th>Prawdopodobieństwo</th>
+                      <th>Impulsiveness</th>
+                      <th>Probability</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -213,7 +212,7 @@
                     </tr>
                     <tr>
                       <td>25-34</td>
-                      <td>K</td>
+                      <td>F</td>
                       <td>0.92</td>
                       <td>1.23</td>
                       <td>68%</td>
@@ -229,7 +228,7 @@
                 </table>
               </div>
               <button class="btn btn-primary mt-3" id="generateProfiles">
-                <i class="fas fa-sync-alt me-2"></i>Wygeneruj nowe profile
+                <i class="fas fa-sync-alt me-2"></i>Generate new profiles
               </button>
             </div>
           </div>
@@ -240,8 +239,7 @@
     <footer class="bg-dark text-center text-white-50 py-4 mt-5">
       <div class="container">
         <p class="mb-0">
-          © 2025 Drug Analysis ML | Projekt z użyciem uczenia maszynowego i
-          GenAI
+          © 2025 Drug Analysis ML | Project using machine learning and GenAI
         </p>
       </div>
     </footer>
@@ -390,23 +388,23 @@
               colorscale: 'Viridis',
               size: 14,
               colorbar: {
-                  title: 'Prawdopodobieństwo'
+                  title: 'Probability'
               }
           }
       }];
 
       const profilesLayout = {
-          title: 'Rozkład syntetycznych profili',
+          title: 'Distribution of synthetic profiles',
           paper_bgcolor: 'rgba(0,0,0,0)',
           plot_bgcolor: 'rgba(0,0,0,0)',
           font: {
               color: '#e0e0e0'
           },
           xaxis: {
-              title: 'Poszukiwanie doznań (SS)'
+              title: 'Sensation Seeking (SS)'
           },
           yaxis: {
-              title: 'Impulsywność'
+              title: 'Impulsiveness'
           }
       };
 
@@ -421,10 +419,10 @@
       function updateVisibleChart(chartType) {
         // Update chart title
         const titleMap = {
-          'age': 'Rozkład używania narkotyków według wieku',
-          'gender': 'Rozkład używania narkotyków według płci',
-          'education': 'Rozkład używania narkotyków według edukacji',
-          'mentalHealth': 'Rozkład używania narkotyków według zdrowia psychicznego'
+          'age': 'Distribution of drug use by age',
+          'gender': 'Distribution of drug use by gender',
+          'education': 'Distribution of drug use by education',
+          'mentalHealth': 'Distribution of drug use by mental health'
         };
 
         document.getElementById('currentChartTitle').textContent = titleMap[chartType];
@@ -486,7 +484,7 @@
         const drugType = document.getElementById('drugType').value;
 
         // Simulate loading
-        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Aktualizowanie...';
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Updating...';
         this.disabled = true;
 
         // In a real implementation, this would make an AJAX call to the server
@@ -496,24 +494,24 @@
 
           // Update chart title to reflect drug type
           const drugTypeLabels = {
-            'all': 'wszystkich narkotyków',
-            'opioid': 'opioidów',
-            'ecstasy': 'ekstazy',
-            'benzo': 'benzodiazepin'
+            'all': 'all drugs',
+            'opioid': 'opioids',
+            'ecstasy': 'ecstasy',
+            'benzo': 'benzodiazepines'
           };
 
           const chartTypeLabels = {
-            'age': 'wieku',
-            'gender': 'płci',
-            'education': 'edukacji',
-            'mentalHealth': 'zdrowia psychicznego'
+            'age': 'age',
+            'gender': 'gender',
+            'education': 'education',
+            'mentalHealth': 'mental health'
           };
 
           document.getElementById('currentChartTitle').textContent =
-            `Rozkład używania ${drugTypeLabels[drugType]} według ${chartTypeLabels[chartType]}`;
+            `Distribution of ${drugTypeLabels[drugType]} use by ${chartTypeLabels[chartType]}`;
 
           // Reset button
-          this.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Aktualizuj wykres';
+          this.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Update chart';
           this.disabled = false;
         }, 800);
       });
@@ -521,7 +519,7 @@
       // Handle generate profiles button
       document.getElementById('generateProfiles').addEventListener('click', function() {
         // Simulate loading
-        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Generowanie...';
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Generating...';
         this.disabled = true;
 
         setTimeout(() => {
@@ -551,7 +549,7 @@
 
           for (let i = 0; i < 3; i++) {
             const age = ['18-24', '25-34', '35-44'][Math.floor(Math.random() * 3)];
-            const gender = Math.random() > 0.5 ? 'M' : 'K';
+            const gender = Math.random() > 0.5 ? 'M' : 'F';
             const ss = newProfilesX[i];
             const impulsive = newProfilesY[i];
             const probability = Math.round(newProbabilities[i] * 100);
@@ -568,7 +566,7 @@
           }
 
           // Reset button
-          this.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Wygeneruj nowe profile';
+          this.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Generate new profiles';
           this.disabled = false;
         }, 1000);
       });
